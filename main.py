@@ -3,6 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn import datasets
 from scipy.spatial import ConvexHull
+from myConvexHull import *
+from operator import itemgetter
+
 
 
 data = datasets.load_iris()
@@ -21,11 +24,15 @@ plt.ylabel(data.feature_names[1])
 for i in range(len(data.target_names)):
     bucket = df[df['Target'] == i]
     bucket = bucket.iloc[:,[0,1]].values
-    #print(bucket)
-    print("Hello World")
+    #print("ini bucket\n")
+    #print(bucket[0,0], bucket[0,1])
+    hullMonic = ConvexHullMonic(bucket) #bagian ini diganti dengan hasil implementasi ConvexHull Divide & Conquer
+    print(hullMonic);
     hull = ConvexHull(bucket) #bagian ini diganti dengan hasil implementasi ConvexHull Divide & Conquer
-    #print(bucket)
     plt.scatter(bucket[:, 0], bucket[:, 1], label=data.target_names[i])
+    #print("ini hull.simplice\n")
+    #print(hull.simplices)
+
     for simplex in hull.simplices:
         plt.plot(bucket[simplex, 0], bucket[simplex, 1], colors[i])
 plt.legend()
