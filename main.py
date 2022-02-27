@@ -32,9 +32,18 @@ for i in range(len(data.target_names)):
     print(hullMonic)
     hull = ConvexHull(bucket) #bagian ini diganti dengan hasil implementasi ConvexHull Divide & Conquer
     plt.scatter(bucket[:, 0], bucket[:, 1], label=data.target_names[i])
-    #print("ini hull.simplice\n")
-    #print(hull.simplices)
-
     for simplex in hull.simplices:
         plt.plot(bucket[simplex, 0], bucket[simplex, 1], colors[i])
 plt.legend()
+
+'''
+hull = myConvexHull(bucket) #bagian ini diganti dengan hasil implementasi ConvexHull Divide & Conquer
+    hull = hull.astype(int)
+    print(hull)
+    plt.scatter(bucket[:, 0], bucket[:, 1], label=data.target_names[i])
+    for point1, point2 in hull:
+        plt.plot(bucket[point1], bucket[point2], colors[i])
+
+
+
+'''
