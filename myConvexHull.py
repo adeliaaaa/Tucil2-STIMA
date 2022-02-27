@@ -1,9 +1,9 @@
-from tempfile import tempdir
 import numpy as np
 
 def ConvexHullMonic(bucket):
  
     solution = np.array([[0.0,0.0]])
+
 
 
     sort = sorted(bucket,key=lambda x:(x[0],x[1]))
@@ -12,10 +12,12 @@ def ConvexHullMonic(bucket):
 
     solution[0] = sort[0]
     solution = np.vstack((solution, sort[len(sort)-1]))
-    
-    #print(solution)
 
-    matriks = np.array([[solution[0,0], solution[0,1], 1], [solution[1,0], solution[1,1], 1], [0,0,1]])
+
+    hulSim = np.array([[5, 5]])
+    hulSim = np.delete(hulSim, 0, axis=0)
+
+
     s1 = np.array([[1.0, 2.0]])
     s1 = np.delete(s1, 0, axis=0)
 
@@ -34,18 +36,21 @@ def ConvexHullMonic(bucket):
     result = np.delete(result, 0, axis=0)
 
 
-    solution = np.append(solution, np.array(findHull(solution, s1, solution[0], solution[1])), axis=0)
-    solution = np.append(solution, np.array(findHull(solution, s2, solution[1], solution[0])), axis=0)
+    hulSim = np.append(hulSim, np.array(findHull(bucket, hulSim, solution, s1, solution[0], solution[1])), axis=0)
+    hulSim = np.append(hulSim, np.array(findHull(bucket, hulSim,solution, s2, solution[1], solution[0])), axis=0)
 
-    return solution
+    return hulSim
 
 
-def findHull(solution, S,A,B):
+def findHull(bucket, hulSim,solution, S,A,B):
 
     if(S.size == 0):
         #print(S)
         #print(A)
-        return S
+        temp = np.array([[0, 0]])
+        temp[0][0] = findIndex(bucket, A[0], A[1])
+        temp[0][1] = findIndex(bucket, B[0], B[1])
+        return temp
     else:
         # Find Orthogonally farthest point from AB
         solution = np.array([[1.0, 2.0]])
@@ -67,7 +72,7 @@ def findHull(solution, S,A,B):
                 tempDistance = d
                 fartest = S[i]
 
-        solution = np.vstack((solution, fartest))
+        #solution = np.vstack((solution, fartest))
 
         x1 = np.array([[1.0, 2.0]])
         x1 = np.delete(x1, 0, axis=0)
@@ -82,8 +87,8 @@ def findHull(solution, S,A,B):
                 else:
                     x2 = np.vstack((x2, S[i]))
 
-        solution = np.append(solution, np.array(findHull(solution, x1, A, fartest)), axis=0)
-        solution = np.append(solution, np.array(findHull(solution,x2,fartest,B)), axis=0)
+        solution = np.append(solution, np.array(findHull(bucket, hulSim,solution, x1, A, fartest)), axis=0)
+        solution = np.append(solution, np.array(findHull(bucket, hulSim,solution,x2,fartest,B)), axis=0)
 
         #print(solution)
 
@@ -136,3 +141,11 @@ def findDeter(a,b,c,d,x,y):
         
         
     return d
+
+def findIndex(bucket, x, y):
+    for i in range (len(bucket)):
+        if(bucket[i][0] == x and bucket[i][1] == y):
+            return i
+
+def findJarak(x,y,s,t):
+    d = (((x-s)**2)+((y-t)**2))**(1/2)

@@ -1,11 +1,17 @@
 ini bucket
-[1[5.1 3.5] 2[4.9 3. ] 3[4.7 3.2] 4[4.6 3.1] 5[5.  3.6] 6[5.4 3.9] [4.6 3.4] 8[5.  3.4] [4.4 2.9] 10[4.9 3.1] [5.4 3.7] 12[4.8 3.4] [4.8 3. ] 14[4.3 3. ] [5.8 4. ] [5.7 4.4] [5.4 3.9] [5.1 3.5] [5.7 3.8] [5.1 3.8] [5.4 3.4] [5.1 3.7] [4.6 3.6] [5.1 3.3] [4.8 3.4] [5.  3. ] [5.  3.4] [5.2 3.5] [5.2 3.4] [4.7 3.2] [4.8 3.1] [5.4 3.4] [5.2 4.1] [5.5 4.2] [4.9 3.1] [5.  3.2] [5.5 3.5] [4.9 3.6] [4.4 3. ] [5.1 3.4] [5.  3.5] [4.5 2.3] [4.4 3.2] [5.  3.5] [5.1 3.8] [4.8 3. ] [5.1 3.8] [4.6 3.2] [5.3 3.7] [5.  3.3]]
+[0[5.1 3.5] 1[4.9 3. ] 2[4.7 3.2] 3[4.6 3.1] 4[5.  3.6] 5[5.4 3.9] 6[4.6 3.4] 7[5.  3.4] [4.4 2.9] 9[4.9 3.1] [5.4 3.7] 11[4.8 3.4] [4.8 3. ] 13[4.3 3. ] [5.8 4. ] 
+15[5.7 4.4] [5.4 3.9] [5.1 3.5] 18[5.7 3.8] [5.1 3.8] [5.4 3.4] 21[5.1 3.7] 22[4.6 3.6] 23[5.1 3.3] [4.8 3.4] [5.  3. ] 26[5.  3.4] [5.2 3.5] [5.2 3.4] [4.7 3.2] 
+30[4.8 3.1] [5.4 3.4] 32[5.2 4.1] 33[5.5 4.2] [4.9 3.1] [5.  3.2] 36[5.5 3.5] 37[4.9 3.6] [4.4 3. ] [5.1 3.4] [5.  3.5] 41[4.5 2.3] [4.4 3.2] [5.  3.5] [5.1 3.8] 
+45[4.8 3. ] [5.1 3.8] [4.6 3.2] [5.3 3.7] 49[5.  3.3]]
 
 ini hull.simplice
 [[41 13] [36 41] [22 13] [22 32] [15 14] [15 32] [18 14] [18 36]]
 
 ini bucket
-[[7.  3.2] [6.4 3.2] [6.9 3.1] [5.5 2.3] [6.5 2.8] [5.7 2.8] [6.3 3.3] [4.9 2.4] [6.6 2.9] [5.2 2.7] [5.  2. ] [5.9 3. ] [6.  2.2] [6.1 2.9] [5.6 2.9] [6.7 3.1] [5.6 3. ] [5.8 2.7] [6.2 2.2] [5.6 2.5] [5.9 3.2] [6.1 2.8] [6.3 2.5] [6.1 2.8] [6.4 2.9] [6.6 3. ] [6.8 2.8] [6.7 3. ] [6.  2.9] [5.7 2.6] [5.5 2.4] [5.5 2.4] [5.8 2.7] [6.  2.7] [5.4 3. ] [6.  3.4] [6.7 3.1] [6.3 2.3] [5.6 3. ] [5.5 2.5] [5.5 2.6] [6.1 3. ] [5.8 2.6] [5.  2.3] [5.6 2.7] [5.7 3. ] [5.7 2.9] [6.2 2.9] [5.1 2.5] [5.7 2.8]]
+[0[7.  3.2] [6.4 3.2] [6.9 3.1] 3[5.5 2.3] [6.5 2.8] [5.7 2.8] 6[6.3 3.3] [4.9 2.4] [6.6 2.9] 9[5.2 2.7] [5.  2. ] [5.9 3. ] 12[6.  2.2] [6.1 2.9] [5.6 2.9]
+15[6.7 3.1] [5.6 3. ] [5.8 2.7] 18[6.2 2.2] [5.6 2.5] [5.9 3.2] 21[6.1 2.8] [6.3 2.5] [6.1 2.8] 24[6.4 2.9] [6.6 3. ] [6.8 2.8] 27[6.7 3. ] [6.  2.9] [5.7 2.6] 
+30[5.5 2.4] [5.5 2.4] [5.8 2.7] 33[6.  2.7] [5.4 3. ] [6.  3.4] 36[6.7 3.1] [6.3 2.3] [5.6 3. ] 39[5.5 2.5] [5.5 2.6] [6.1 3. ] 42[5.8 2.6] [5.  2.3] [5.6 2.7] 
+45[5.7 3. ] [5.7 2.9] [6.2 2.9] 48[5.1 2.5] [5.7 2.8]]
 
 ini hull.simplice
 [[35  0] [34  7] [34 35] [10  7] [10 18] [26  0] [26 18]]
@@ -87,19 +93,21 @@ import numpy as np
 def ConvexHullMonic(bucket):
  
     solution = np.array([[0.0,0.0]])
+    hulSimpli = np.array([[0.0,0.0]])
 
 
     sort = sorted(bucket,key=lambda x:(x[0],x[1]))
-    print(sort[0])
-    print(sort[len(sort)-1])
+    #print(sort[0])
+    #print(sort[len(sort)-1])
 
     solution[0] = sort[0]
     solution = np.vstack((solution, sort[len(sort)-1]))
-    
-    print(solution)
 
 
-    matriks = np.array([[solution[0,0], solution[0,1], 1], [solution[1,0], solution[1,1], 1], [0,0,1]])
+    hulSim = np.array([[1.0, 2.0]])
+    hulSim = np.delete(hulSim, 0, axis=0)
+
+
     s1 = np.array([[1.0, 2.0]])
     s1 = np.delete(s1, 0, axis=0)
 
@@ -109,65 +117,50 @@ def ConvexHullMonic(bucket):
 
     for i  in range (len(bucket)):
         if((bucket[i,0] != solution[0,0] and bucket[i,1] != solution[0,1]) or (bucket[i,0] != solution[1,0] and bucket[i,1] != solution[1,1])):
-            matriks[2,0] = bucket[i,0]
-            matriks[2,1] = bucket[i,1]
-            d = np.linalg.det(matriks)
-            if(d > 0):
+            if(findDeter(solution[0,0], solution[0,1], solution[1,0], solution[1,1], bucket[i,0], bucket[i,1]) > 0):    
                 s1 = np.vstack((s1, bucket[i]))
             else:
                 s2 = np.vstack((s2, bucket[i]))
-
-    #solution = np.vstack((solution, findHull(s1, solution[0], solution[1])))     
-    #solution = np.vstack((solution, findHull(s2, solution[1], solution[0])))     
+   
     result = np.array([[1.0, 2.0]])
     result = np.delete(result, 0, axis=0)
 
-    '''
-    result = findHull(result, s1, solution[0], solution[1])
-    print("si result")
-    print(result)
-    solutionEnd = np.concatenate((solution, result))
-    result = findHull(result, s2, solution[1], solution[0])
-    print("si result")
-    print(result)
 
-    solution = np.concatenate((solutionEnd, result))
-    '''
-
-    solution = np.append(solution, np.array(findHull(result, s1, solution[0], solution[1])), axis=0)
-    solution = np.append(solution, np.array(findHull(result, s2, solution[1], solution[0])), axis=0)
+    solution = np.append(solution, np.array(findHull(solution, s1, solution[0], solution[1])), axis=0)
+    solution = np.append(solution, np.array(findHull(solution, s2, solution[1], solution[0])), axis=0)
 
     return solution
 
 
 def findHull(solution, S,A,B):
-    #print("Masuk sini---------------------------------")
-    #print("A,B,solution")
-    #print(A, B)
 
-    #print("Masuk sini---------------------------------")
     if(S.size == 0):
-        print('CEKTES---------------')
-        return A
+        #print(S)
+        #print(A)
+        return S
     else:
         # Find Orthogonally farthest point from AB
+        solution = np.array([[1.0, 2.0]])
+        solution = np.delete(solution, 0, axis=0)
         fartest = S[0]
         tempDistance = 0.00
         for i in range (len(S)):
+            '''
             sisiA = (((B[1] - A[1])**2) + ((B[0]-A[0])**2))**(1/2)
             sisiB = (((S[i,1] - A[1])**2) + ((S[i,0]-A[0])**2))**(1/2)
             sisiC = (((B[1] - S[i,1])**2) + ((B[0]-S[i,0])**2))**(1/2)
             setKel = (sisiA + sisiB + sisiC)/2
             jarak = (2/sisiA)*((setKel*(setKel-sisiA)*(setKel-sisiB)*(setKel-sisiC))**(1/2))
+            '''
 
-            if(jarak.any() > tempDistance):
-                tempDistance = jarak
+            d = np.linalg.norm(np.cross(B-A, A-S[i]))/np.linalg.norm(B-A)
+
+            if(d > tempDistance):
+                tempDistance = d
                 fartest = S[i]
 
         solution = np.vstack((solution, fartest))
 
-        #print("fARTESTNYA")
-        #print(fartest)
         x1 = np.array([[1.0, 2.0]])
         x1 = np.delete(x1, 0, axis=0)
 
@@ -176,19 +169,15 @@ def findHull(solution, S,A,B):
 
         for i  in range (len(S)):
             if (pointInTriangle(A[0], A[1], B[0], B[1], fartest[0], fartest[1], S[i,0], S[i,1]) == False) :
-                if(fartest[0] > S[i,0]):
+                if(findDeter(A[0], A[1], fartest[0], fartest[1], S[i,0], S[i,1]) > 0):
                     x1 = np.vstack((x1, S[i]))
                 else:
                     x2 = np.vstack((x2, S[i]))
 
-        #solution = np.vstack((solution, findHull(x1, A, fartest)))     
-        #solution = np.vstack((solution, findHull(x1,fartest,B)))  
+        solution = np.append(solution, np.array(findHull(solution, x1, A, fartest)), axis=0)
+        solution = np.append(solution, np.array(findHull(solution,x2,fartest,B)), axis=0)
 
-        #solution = np.append(solution, np.array(findHull(solution, x1, A, fartest)), axis=0)
-        #solution = np.append(solution, np.array(findHull(solution, x2,fartest,B)), axis=0)
-        findHull(solution, x1, A, fartest)
-
-        findHull(solution, x2,fartest,B)
+        #print(solution)
 
         return solution
 
@@ -228,3 +217,22 @@ def pointInTriangle(x1, y1, x2, y2, x3, y3, x, y):
     c = 1 - a - b
  
     return 0 <= a and a <= 1 and 0 <= b and b <= 1 and 0 <= c and c <= 1
+
+
+def findDeter(a,b,c,d,x,y):
+    matriks = np.array([[a, b, 1], [c, d, 1], [0,0,1]])    
+
+    matriks[2,0] = x
+    matriks[2,1] = y
+    d = np.linalg.det(matriks)
+        
+        
+    return d
+
+def findIndex(bucket, x, y):
+    for i in range (len(bucket)):
+        if(bucket[i][0] == x and bucket[i][1] == y):
+            return i
+
+def findJarak(x,y,s,t):
+    d = (((x-s)**2)+((y-t)**2))**(1/2)
