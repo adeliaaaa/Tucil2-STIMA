@@ -22,12 +22,14 @@ plt.title('Petal Width vs Petal Length')
 plt.xlabel(data.feature_names[0])
 plt.ylabel(data.feature_names[1])
 for i in range(len(data.target_names)):
+    print("BARUUUUUUUUUUUUUUUUUUU-----------------------------------------------------------------------")
     bucket = df[df['Target'] == i]
     bucket = bucket.iloc[:,[0,1]].values
     #print("ini bucket\n")
     #print(bucket[0,0], bucket[0,1])
     hullMonic = ConvexHullMonic(bucket) #bagian ini diganti dengan hasil implementasi ConvexHull Divide & Conquer
-    print(hullMonic);
+    print("hasil")
+    print(hullMonic)
     hull = ConvexHull(bucket) #bagian ini diganti dengan hasil implementasi ConvexHull Divide & Conquer
     plt.scatter(bucket[:, 0], bucket[:, 1], label=data.target_names[i])
     #print("ini hull.simplice\n")
